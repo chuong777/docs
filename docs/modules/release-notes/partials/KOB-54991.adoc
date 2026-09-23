@@ -1,0 +1,46 @@
+// Release-note partial for KOB-54991.
+// Include from the release page for the deploy cycle that ships this fix.
+
+== Device passcode unlock
+
+- iOS devices that use a custom numeric passcode now unlock when the power button wakes them during a manual session. Previously, the passcode was not entered, the device stayed on the lock screen for the rest of the session, and installing an application or taking any other action that requires an unlocked device failed while it remained locked. Returning the device to service required entering the passcode by hand on the device.
+- Devices running iOS 15.4.1 and 16.7.10 now finish preparation and become available for sessions. Previously, two steps in the preparation flow repeated without completing: setting a device passcode relaunched *Settings* repeatedly, and on-device automation restarted in a loop.
+
+_Applies to organizations in PIN passcode mode._
+
+// STAGED. The ticket was in Wait For Deployment at drafting time. Hold this partial off any
+// dated release page until the build reaches production.
+//
+// REVIEWER NOTE: Scope. The ticket description frames the failure broadly, as every tested
+// device in an organization using PIN passcode mode staying locked after a power-button
+// wake. The root-cause and verification evidence narrows the defect to devices holding a
+// custom numeric passcode, and records that 4-digit numeric, 6-digit numeric, and custom
+// alphanumeric passcodes unlocked correctly both before and after the fix. This note is
+// drafted to the narrower verified scope. Confirm with the SME before publishing.
+//
+// REVIEWER NOTE: Terminology. "Custom numeric passcode" follows the iOS passcode-type
+// label rather than an established Kobiton docs term, and the public docs do not currently
+// name passcode types. Confirm the wording the docs team wants, and whether to map the
+// term to a numbered passcode mode. Do not assume a mapping; the source evidence says
+// "PIN passcode mode" and gives no mode number.
+//
+// REVIEWER NOTE: Out of scope. The ticket also records that setting a device passcode
+// reports success without confirming the passcode was applied. The available evidence does
+// not say that behavior was addressed, so it is not covered here. Track it separately if it
+// is still open.
+//
+// REVIEWER NOTE: Adjacent doc. The ticket quotes expected power-button behavior from the
+// admin page "Enable passcode for Kobiton 4+ devices" and notes that the page's Known
+// Limitations section describes a disabled Next button in PIN mode with a manual
+// workaround. That page is not in the public docs repository. Check whether the admin page
+// needs a matching update.
+//
+// REVIEWER NOTE: Placement. The ticket is in Wait For Deployment and is not on the
+// 2026-09-18 page, which already carries the sibling deviceConnect fixes KOB-54989 and
+// KOB-54992. Add the include to the release page for the cycle that deploys this build.
+//
+// REVIEWER NOTE: The ticket's release-communication field selects both a customer-facing
+// release email and internal-only support notes. Only the customer-facing half is drafted
+// here.
+
+// Source: KOB-54991
