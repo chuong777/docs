@@ -1,0 +1,43 @@
+// Release-note partial for KOB-54815.
+// Drafted by Robot Ranch from Jira evidence. Not reviewed, not published.
+
+== iOS device connectivity
+
+- iOS devices no longer drop their connection when deviceConnect mounts the Developer Disk Image. Previously, a successful mount reset the device connection, and the device had to reattach before it was usable again.
+
+// REVIEWER NOTE: Verified by QA on macOS 26.2, 26.3.1, and 27.0, on hosts both with and
+// without usbmux redirection, so the fix is not specific to one host configuration.
+// Direct before/after on a single host running 20 devices: the same 12 mounts produced 12
+// connection resets before the change and 0 after, with a service refresh in place of each
+// reset. Two resets remain in the after window, but both are the failure-recovery path
+// rather than this defect, which fired on mount success.
+//
+// REVIEWER NOTE: The ticket does not record how long a device was unavailable after the
+// old reset, or whether other devices on the same host were affected. The bullet is
+// therefore written at the behavior level and makes no claim about duration or blast
+// radius. Ask engineering before adding either.
+//
+// REVIEWER NOTE: The larger half of KOB-54815 changes how deviceConnect obtains the
+// CoreDevice tunnel on macOS hosts with directly attached iOS devices. That half is
+// withheld here per the manager decision recorded on the 2026-08-07 page for KOB-54391:
+// CoreDevice tunnel framing is internal engineering with no clean user-visible rewrite.
+// The ticket claims improved device throughput and coexistence with Xcode and devicectl,
+// but QA captured only a before baseline for throughput and did not exercise the Xcode
+// case, so neither is stated here. Add a bullet if the docs team wants it covered.
+//
+// REVIEWER NOTE: The ticket also describes dropping the root requirement for tunnels.
+// Omitted because it is not end to end complete. The engineering owner confirmed on the
+// ticket that this is one part of a larger effort and that other components still require
+// root. Same reasoning as the KOB-52533 precedent on the 2026-08-07 page.
+//
+// REVIEWER NOTE: A related macOS 27 issue affecting directly attached iOS devices is
+// tracked on KOB-55146. QA noted that its status is unsettled despite the ticket being
+// closed, and that no conclusion about macOS 27 behavior for directly attached devices
+// should be drawn from KOB-54815. Confirm before publishing anything that implies macOS 27
+// coverage beyond the mount behavior above.
+//
+// REVIEWER NOTE: The Documentation Required field on the ticket also lists internal
+// Support Notes for the ML Support team. That output is internal only and is deliberately
+// not part of this partial.
+
+// Source: KOB-54815
