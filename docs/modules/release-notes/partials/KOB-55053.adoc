@@ -1,0 +1,24 @@
+== iOS device passcodes
+
+- Fixed an issue where some iPads returned to available without a passcode after the device language was changed during a session. Kobiton now sets the passcode again before the device reconnects. Previously, an MDM could flag the affected iPad as having no passcode.
+
+// REVIEWER NOTE: iPad only. iPhone is not affected.
+//
+// REVIEWER NOTE: Source evidence conflicts on scope. The ticket description says the issue
+// reproduced consistently on iPadOS 18.x and 26.x. The customer impact field says it occurs
+// only on affected iPadOS builds where the on-screen keyboard flickers. The entry uses "some
+// iPads" and names no iPadOS version. Confirm with engineering before publishing.
+//
+// REVIEWER NOTE: The fix covers the path where the passcode is entered through the host
+// agent's keyboard input. Engineering notes say the Bluetooth keyboard path and the
+// password-type passcode path did not change. Confirm the fix applies to every passcode mode
+// that re-applies a passcode after a language change.
+//
+// REVIEWER NOTE: The ticket is in Wait For Deployment, with resolution Fixed and a passed QA
+// comment on a prerelease deviceConnect build. It has no fix version. Confirm the deviceConnect
+// release that ships the fix and place this entry on the matching release page.
+//
+// REVIEWER NOTE: The ticket also selects Support Notes (internal only). That content belongs
+// in internal support enablement, not in this partial.
+
+// Source: KOB-55053
