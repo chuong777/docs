@@ -1,0 +1,28 @@
+== Device connectivity
+
+- iOS 17 and later devices on Mac mini hosts in Standard mode now come back online on their own after they restart or reconnect. Previously, after a restart, a device could stay in an error state and remain unavailable until deviceConnect services were restarted. This included the restart that happens when deviceConnect turns on Developer Mode on a device.
+- Devices also recover without a services restart after the USB cable is unplugged and plugged back in, after the USB hub loses power, after the device moves to another USB hub, and after the Mac mini host restarts.
+- Lightning mode hosts, Android devices, and iOS 16 and earlier devices were not affected.
+
+// REVIEWER NOTE (BLOCKER): The ticket states this issue was introduced by an earlier change
+// (KOB-54815) that switched how Mac mini hosts connect to iOS 17 and later devices. That
+// ticket is also in Wait For Deployment. If KOB-54815 never reached customers before this
+// release, customers never saw the bug, and this entry should be dropped rather than
+// published. Confirm exposure with engineering before publishing.
+//
+// REVIEWER NOTE: What ships is not the original fix alone. The first QA round failed on
+// Standard mode hosts. Engineering then merged a follow-up change that turns off the new
+// connection method by default so hosts use the previous one, and the retest passed on
+// macOS 26 and macOS 27 hosts in Standard mode. The entry describes the result customers
+// see, not the mechanism. The host setting that turns the new method back on is not
+// documented here because a separate ticket (KOB-55246) will fix and re-enable it.
+//
+// REVIEWER NOTE: The ticket has no fixVersion and no release label, so the target weekly
+// release page is not confirmed. Its Documentation channels field requests a customer-facing
+// release email, which is the release-note evidence for this entry. Confirm placement
+// before publishing. This partial is not included on any release page yet.
+//
+// REVIEWER NOTE: The ticket also requests internal Support Notes. That communication is
+// out of scope for this repository and is not drafted here.
+
+// Source: KOB-55193
